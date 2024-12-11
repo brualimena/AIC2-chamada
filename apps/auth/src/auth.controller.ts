@@ -1,11 +1,11 @@
 import { Controller, Post, Body, ValidationPipe } from '@nestjs/common';
-import { AppService } from './app.service';
+import { AuthService } from './auth.service';
 import { SignUpUserDto } from './dtos/signup-user.dto';
 import { SignInUserDto } from './dtos/signin-user.dto';
 
-@Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+@Controller('/auth')
+export class AuthController {
+  constructor(private readonly appService: AuthService) {}
 
   @Post('/signup-aluno')
   async signupAluno(@Body(new ValidationPipe()) criarAlunoDto: SignUpUserDto) {

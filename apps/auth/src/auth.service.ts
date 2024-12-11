@@ -4,7 +4,7 @@ import { PrismaService } from 'database/src/prisma.service';
 import { SignInUserDto } from './dtos/signin-user.dto';
 
 @Injectable()
-export class AppService {
+export class AuthService {
   constructor( private readonly prisma: PrismaService) {}
 
   async signupAluno(data: SignUpUserDto) {

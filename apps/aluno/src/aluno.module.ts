@@ -10,7 +10,7 @@ import { AlunoService } from './aluno.service';
     PrismaModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: './apps/auth/.env',
+      envFilePath: './apps/aluno/.env',
       validationSchema: Joi.object({
         HTTP_PORT: Joi.number().required(),        
         DATABASE_URL: Joi.string().required(),

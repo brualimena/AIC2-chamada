@@ -9,6 +9,7 @@
     "build": "nest build",
     "start:auth": "node dist/apps/auth/src/main.js",
     "start:aluno": "node dist/apps/aluno/src/main.js",
+    "start:professor": "node dist/apps/professor/src/main.js",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",

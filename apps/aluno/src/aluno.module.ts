@@ -3,6 +3,7 @@ import { PrismaModule } from 'database/src/prisma.module';
 import { AlunoController } from './aluno.controller';
 import { ConfigModule } from '@nestjs/config';
 import Joi from 'joi';
+import { AlunoService } from './aluno.service';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import Joi from 'joi';
         DATABASE_URL: Joi.string().required(),
       })
     })  
-  ],,
+  ],
   controllers: [AlunoController],
   providers: [AlunoService],
 })

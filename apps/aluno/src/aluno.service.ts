@@ -49,4 +49,17 @@ export class AlunoService {
         })
         return code
     }
+
+    async getPresencas(aluno_id: string, data: MatriculaDto) {
+        const presencas= await this.prisma.presenca.findUnique({
+            where: {
+                aluno_id: aluno_id,
+                turma_id: data.turma_id
+            },
+            select: {
+                presenca: true
+            }
+        })
+        return presencas
+    }
 }

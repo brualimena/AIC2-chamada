@@ -1,4 +1,4 @@
-import { Body, Controller, Post, ValidationPipe, Param } from '@nestjs/common';
+import { Body, Controller, Post, ValidationPipe, Param, Get } from '@nestjs/common';
 import { AlunoService } from './aluno.service';
 import { MatriculaDto } from './dtos/matricula.dto';
 
@@ -14,6 +14,11 @@ export class AlunoController {
     @Post('/create-code/:aluno_id')
     async createCode(@Param() alunoId:string, @Body(new ValidationPipe()) matriculaDto: MatriculaDto) {
       return await this.appService.createCode(alunoId, matriculaDto)
-  }
+    }
+
+    @Get('/get-presencas/:aluno_id')
+    async getPresencas(@Param() alunoId:string, @Body(new ValidationPipe) matriculaDto:MatriculaDto) {
+      return await this.appService.getPresencas(alunoId, matriculaDto)
+    }
 
 }

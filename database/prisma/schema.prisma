@@ -15,7 +15,8 @@ model Aluno {
   cpf         String    @unique
   password    String
   
-  matriculas      Matricula[]   
+  matriculas      Matricula[] 
+  presencas       Presenca[]  
 }
 
 model Professor{
@@ -31,9 +32,11 @@ model Professor{
 model Turma{
   turma_id    String    @id @unique
   materia     String
-  date        DateTime
   professor_id   String    @unique
+  acontecendo Boolean   @default(false)
+
   matricula   Matricula[]
+  presenca    Presenca[]
   Professor   Professor   @relation(fields: [professor_id], references: [id])
 }
 
@@ -41,6 +44,17 @@ model Matricula {
   aluno_id    String    @unique
   turma_id    String    @unique
   code        String?   @unique
+
+  aluno       Aluno    @relation(fields: [aluno_id], references: [id])
+  turma       Turma    @relation(fields: [turma_id], references: [turma_id])
+
+  @@id([aluno_id, turma_id])  
+}
+
+model Presenca {
+  aluno_id    String    @unique
+  turma_id    String    @unique
+  presenca    Int       @default(0)
 
   aluno       Aluno    @relation(fields: [aluno_id], references: [id])
   turma       Turma    @relation(fields: [turma_id], references: [turma_id])

@@ -24,7 +24,6 @@ CREATE TABLE "Professor" (
 CREATE TABLE "Turma" (
     "turma_id" TEXT NOT NULL,
     "materia" TEXT NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
     "professor_id" TEXT NOT NULL,
 
     CONSTRAINT "Turma_pkey" PRIMARY KEY ("turma_id")
@@ -34,6 +33,7 @@ CREATE TABLE "Turma" (
 CREATE TABLE "Matricula" (
     "aluno_id" TEXT NOT NULL,
     "turma_id" TEXT NOT NULL,
+    "code" TEXT,
 
     CONSTRAINT "Matricula_pkey" PRIMARY KEY ("aluno_id","turma_id")
 );
@@ -67,6 +67,9 @@ CREATE UNIQUE INDEX "Matricula_aluno_id_key" ON "Matricula"("aluno_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Matricula_turma_id_key" ON "Matricula"("turma_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Matricula_code_key" ON "Matricula"("code");
 
 -- AddForeignKey
 ALTER TABLE "Turma" ADD CONSTRAINT "Turma_professor_id_fkey" FOREIGN KEY ("professor_id") REFERENCES "Professor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

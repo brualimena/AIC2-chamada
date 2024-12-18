@@ -75,4 +75,17 @@ export class ProfessorService {
     })
     return computa
   }
+
+  async getChamada(turmaId: string) {
+    const chamada= await this.prisma.presenca.findMany({
+        where: {
+            turma_id: turmaId
+        },
+        select: {
+            aluno_id: true,
+            presenca: true
+        }
+    })
+    return chamada
+  }
 }

@@ -22,7 +22,7 @@ export class AlunoService {
 
     async createCode(userId: string, data: MatriculaDto) {
         let generate = this.generateCode();
-        let existingCode = await this.prisma.matricula.findUnique({
+        let existingCode = await this.prisma.matricula.findFirst({
         where: {
             code: generate,
         },
@@ -30,7 +30,7 @@ export class AlunoService {
 
         while (existingCode) {
         generate = this.generateCode();
-        existingCode = await this.prisma.matricula.findUnique({
+        existingCode = await this.prisma.matricula.findFirst({
             where: {
             code: generate,
             },
@@ -39,8 +39,10 @@ export class AlunoService {
 
         const code = await this.prisma.matricula.update({
         where: {
-            aluno_id: userId,
-            turma_id: data.turma_id,
+            aluno_id_turma_id: {
+                aluno_id: userId,
+                turma_id: data.turma_id,
+            }
         },
         data: {
             code: generate,
@@ -51,7 +53,7 @@ export class AlunoService {
     }
 
     async getPresencas(aluno_id: string, data: MatriculaDto) {
-        const presencas= await this.prisma.presenca.findUnique({
+        const presencas= await this.prisma.presenca.findFirst({
             where: {
                 aluno_id: aluno_id,
                 turma_id: data.turma_id

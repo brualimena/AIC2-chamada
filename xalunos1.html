@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste de Cadastro e Login</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center">Teste de Cadastro e Login</h1>
+
+    <!-- Formulário de Cadastro de Aluno -->
+    <div class="card mt-4">
+      <div class="card-header">Cadastro de Aluno</div>
+      <div class="card-body">
+        <form id="signupAlunoForm">
+          <div class="form-group">
+            <label for="alunoId">ID</label>
+            <input type="text" class="form-control" id="alunoId" required>
+          </div>
+          <div class="form-group">
+            <label for="alunoNome">Nome</label>
+            <input type="text" class="form-control" id="alunoNome" required>
+          </div>
+          <div class="form-group">
+            <label for="alunoEmail">Email</label>
+            <input type="email" class="form-control" id="alunoEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="alunoCpf">CPF</label>
+            <input type="text" class="form-control" id="alunoCpf" required>
+          </div>
+          <div class="form-group">
+            <label for="alunoPassword">Senha</label>
+            <input type="password" class="form-control" id="alunoPassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+        <div id="signupAlunoMessage" class="mt-3"></div>
+      </div>
+    </div>
+
+    <!-- Formulário de Cadastro de Professor -->
+    <div class="card mt-4">
+      <div class="card-header">Cadastro de Professor</div>
+      <div class="card-body">
+        <form id="signupProfessorForm">
+          <div class="form-group">
+            <label for="professorId">ID</label>
+            <input type="text" class="form-control" id="professorId" required>
+          </div>
+          <div class="form-group">
+            <label for="professorNome">Nome</label>
+            <input type="text" class="form-control" id="professorNome" required>
+          </div>
+          <div class="form-group">
+            <label for="professorEmail">Email</label>
+            <input type="email" class="form-control" id="professorEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="professorCpf">CPF</label>
+            <input type="text" class="form-control" id="professorCpf" required>
+          </div>
+          <div class="form-group">
+            <label for="professorPassword">Senha</label>
+            <input type="password" class="form-control" id="professorPassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+        <div id="signupProfessorMessage" class="mt-3"></div>
+      </div>
+    </div>
+
+    <!-- Formulário de Login de Aluno -->
+    <div class="card mt-4">
+      <div class="card-header">Login de Aluno</div>
+      <div class="card-body">
+        <form id="signinAlunoForm">
+          <div class="form-group">
+            <label for="alunoEmailLogin">Email</label>
+            <input type="email" class="form-control" id="alunoEmailLogin" required>
+          </div>
+          <div class="form-group">
+            <label for="alunoPasswordLogin">Senha</label>
+            <input type="password" class="form-control" id="alunoPasswordLogin" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <div id="signinAlunoMessage" class="mt-3"></div>
+      </div>
+    </div>
+
+    <!-- Formulário de Login de Professor -->
+    <div class="card mt-4">
+      <div class="card-header">Login de Professor</div>
+      <div class="card-body">
+        <form id="signinProfessorForm">
+          <div class="form-group">
+            <label for="professorEmailLogin">Email</label>
+            <input type="email" class="form-control" id="professorEmailLogin" required>
+          </div>
+          <div class="form-group">
+            <label for="professorPasswordLogin">Senha</label>
+            <input type="password" class="form-control" id="professorPasswordLogin" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <div id="signinProfessorMessage" class="mt-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const backendUrl = 'http://localhost:3000'; // URL do backend NestJS
+
+    document.getElementById('signupAlunoForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const data = {
+        id: document.getElementById('alunoId').value,
+        nome: document.getElementById('alunoNome').value,
+        email: document.getElementById('alunoEmail').value,
+        cpf: document.getElementById('alunoCpf').value,
+        password: document.getElementById('alunoPassword').value,
+      };
+      try {
+        const response = await fetch(`${backendUrl}/signup-aluno`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (response.ok) {
+          document.getElementById('signupAlunoMessage').innerText = 'Aluno cadastrado com sucesso!';
+          document.getElementById('signupAlunoMessage').classList.add('text-success');
+        } else {
+          document.getElementById('signupAlunoMessage').innerText = `Erro ao cadastrar aluno: ${result.message}`;
+          document.getElementById('signupAlunoMessage').classList.add('text-danger');
+        }
+      } catch (error) {
+        document.getElementById('signupAlunoMessage').innerText = 'Erro ao conectar com o servidor.';
+        document.getElementById('signupAlunoMessage').classList.add('text-danger');
+      }
+    });
+
+    document.getElementById('signupProfessorForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const data = {
+        id: document.getElementById('professorId').value,
+        nome: document.getElementById('professorNome').value,
+        email: document.getElementById('professorEmail').value,
+        cpf: document.getElementById('professorCpf').value,
+        password: document.getElementById('professorPassword').value,
+      };
+      try {
+        const response = await fetch(`${backendUrl}/signup-professor`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (response.ok) {
+          document.getElementById('signupProfessorMessage').innerText = 'Professor cadastrado com sucesso!';
+          document.getElementById('signupProfessorMessage').classList.add('text-success');
+        } else {
+          document.getElementById('signupProfessorMessage').innerText = `Erro ao cadastrar professor: ${result.message}`;
+          document.getElementById('signupProfessorMessage').classList.add('text-danger');
+        }
+      } catch (error) {
+        document.getElementById('signupProfessorMessage').innerText = 'Erro ao conectar com o servidor.';
+        document.getElementById('signupProfessorMessage').classList.add('text-danger');
+      }
+    });
+
+    document.getElementById('signinAlunoForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const data = {
+        email: document.getElementById('alunoEmailLogin').value,
+        password: document.getElementById('alunoPasswordLogin').value,
+      };
+      try {
+        const response = await fetch(`${backendUrl}/signin-aluno`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (response.ok) {
+          document.getElementById('signinAlunoMessage').innerText = 'Login de aluno realizado com sucesso!';
+          document.getElementById('signinAlunoMessage').classList.add('text-success');
+        } else {
+          document.getElementById('signinAlunoMessage').innerText = `Erro ao fazer login de aluno: ${result.message}`;
+          document.getElementById('signinAlunoMessage').classList.add('text-danger');
+        }
+      } catch (error) {
+        document.getElementById('signinAlunoMessage').innerText = 'Erro ao conectar com o servidor.';
+        document.getElementById('signinAlunoMessage').classList.add('text-danger');
+      }
+    });
+
+    document.getElementById('signinProfessorForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const data = {
+        email: document.getElementById('professorEmailLogin').value,
+        password: document.getElementById('professorPasswordLogin').value,
+      };
+      try {
+        const response = await fetch(`${backendUrl}/signin-professor`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+        const result = await response.json();
+        if (response.ok) {
+          document.getElementById('signinProfessorMessage').innerText = 'Login de professor realizado com sucesso!';
+          document.getElementById('signinProfessorMessage').classList.add('text-success');
+        } else {
+          document.getElementById('signinProfessorMessage').innerText = `Erro ao fazer login de professor: ${result.message}`;
+          document.getElementById('signinProfessorMessage').classList.add('text-danger');
+        }
+      } catch (error) {
+        document.getElementById('signinProfessorMessage').innerText = 'Erro ao conectar com o servidor.';
+        document.getElementById('signinProfessorMessage').classList.add('text-danger');
+      }
+    });
+  </script>
+</body>
+</html>

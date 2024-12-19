@@ -9,7 +9,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
   <style>
     body {
-      
       background: url('https://www.furg.br/arquivos/Noticias/2022/Institucional/22-07-2022-campus-carreiros-furg.jpg') no-repeat center center fixed;
       background-size: cover;
     }
@@ -29,6 +28,18 @@
     }
     .card {
       background: rgba(255, 255, 255, 0.8);
+    }
+    .map-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 80px; /* Ajuste a margem superior para 30px */
+    }
+    .map-container iframe {
+      width: 300px; /* Metade do tamanho original */
+      height: 225px; /* Metade do tamanho original */
+      border: 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+      border-radius: 8px; /* Adiciona bordas arredondadas */
     }
   </style>
 </head>
@@ -139,12 +150,20 @@
   <div class="background-blur"></div>
 
   <div class="container mt-5 content">
-    <h1 class="text-center">Bem-vindo ao Sistema de Cadastro e Login</h1>
+    <h1 class="text-center">Bem-vindo</h1>
+    <h2 class="text-center">Smart Campus Furg</h2>
     <p class="text-center">Por favor, escolha uma das opções abaixo:</p>
     <div class="d-flex justify-content-center mt-4">
       <a href="signin.html" class="btn btn-primary mx-2">Login</a>
       <a href="signup.html" class="btn btn-secondary mx-2">Cadastro</a>
     </div>
   </div>
+
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13523.558343546974!2d-52.160657!3d-32.072235!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95119c1050f8efb1%3A0xeb4889911365b87c!2sFederal%20University%20of%20Rio%20Grande%2C%20Campus%20Carreiros!5e0!3m2!1sen!2sbr!4v1733880026724!5m2!1sen!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+  
 </body>
 </html>
+
+
